@@ -27,6 +27,10 @@ document.addEventListener("DOMContentLoaded", () => {
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
         `;
 
+        // Add participants component
+        const participantsComponent = createParticipantsComponent(details.participants);
+        activityCard.appendChild(participantsComponent);
+
         activitiesList.appendChild(activityCard);
 
         // Add option to select dropdown
@@ -39,6 +43,21 @@ document.addEventListener("DOMContentLoaded", () => {
       activitiesList.innerHTML = "<p>Failed to load activities. Please try again later.</p>";
       console.error("Error fetching activities:", error);
     }
+  }
+
+  // Function to create participant elements
+  function createParticipantsComponent(participants) {
+    const participantsContainer = document.createElement("div");
+    participantsContainer.className = "participants-container";
+
+    participants.forEach((participant) => {
+      const participantElement = document.createElement("span");
+      participantElement.className = "participant";
+      participantElement.textContent = participant;
+      participantsContainer.appendChild(participantElement);
+    });
+
+    return participantsContainer;
   }
 
   // Handle form submission
